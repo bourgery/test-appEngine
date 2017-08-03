@@ -45,12 +45,9 @@ class App {
         let router = express.Router();
         // placeholder route handler
         router.post('/updateCounter', (req: Request, res: Response, next: NextFunction) => {
-            res.json({
-               message: "coucou"
-            });
-            // const counter: Counter = new Counter(req.body.path);
-            // counter.update(req.body.date, req.body.up).then(() => res.sendStatus(200))
-            //     .catch(() => res.sendStatus(500));
+            const counter: Counter = new Counter(req.body.path);
+            counter.update(req.body.date, req.body.up).then(() => res.sendStatus(200))
+                .catch(() => res.sendStatus(500));
         });
         this.express.use('/', router);
     }

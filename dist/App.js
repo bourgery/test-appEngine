@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const admin = require("firebase-admin");
 const config_1 = require("./config/config");
+const Counter_1 = require("./Counter");
 // Creates and configures an ExpressJS web server.
 class App {
     //Run configuration methods on the Express instance.
@@ -37,12 +38,9 @@ class App {
         let router = express.Router();
         // placeholder route handler
         router.post('/updateCounter', (req, res, next) => {
-            res.json({
-                message: "coucou"
-            });
-            // const counter: Counter = new Counter(req.body.path);
-            // counter.update(req.body.date, req.body.up).then(() => res.sendStatus(200))
-            //     .catch(() => res.sendStatus(500));
+            const counter = new Counter_1.Counter(req.body.path);
+            counter.update(req.body.date, req.body.up).then(() => res.sendStatus(200))
+                .catch(() => res.sendStatus(500));
         });
         this.express.use('/', router);
     }
